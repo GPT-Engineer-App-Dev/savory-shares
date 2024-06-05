@@ -1,17 +1,42 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
+import { Container, Text, VStack, Heading, Box, Image, SimpleGrid, LinkBox, LinkOverlay } from "@chakra-ui/react";
 
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+const recipes = [
+  {
+    title: "Spaghetti Carbonara",
+    image: "https://via.placeholder.com/150",
+    description: "A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper.",
+  },
+  {
+    title: "Chicken Tikka Masala",
+    image: "https://via.placeholder.com/150",
+    description: "Chunks of roasted marinated chicken in a spiced curry sauce.",
+  },
+  {
+    title: "Beef Stroganoff",
+    image: "https://via.placeholder.com/150",
+    description: "A Russian dish of sautéed pieces of beef served in a sauce with smetana (sour cream).",
+  },
+];
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
+    <Container maxW="container.xl" py={10}>
+      <VStack spacing={8}>
+        <Heading as="h1" size="2xl">Recipe Sharing Website</Heading>
+        <Text fontSize="xl">Discover and share your favorite recipes!</Text>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+          {recipes.map((recipe, index) => (
+            <LinkBox as="article" key={index} p="5" borderWidth="1px" rounded="md">
+              <Box>
+                <Image src={recipe.image} alt={recipe.title} borderRadius="md" />
+                <Heading size="md" my="2">
+                  <LinkOverlay href="#">{recipe.title}</LinkOverlay>
+                </Heading>
+                <Text>{recipe.description}</Text>
+              </Box>
+            </LinkBox>
+          ))}
+        </SimpleGrid>
       </VStack>
     </Container>
   );
